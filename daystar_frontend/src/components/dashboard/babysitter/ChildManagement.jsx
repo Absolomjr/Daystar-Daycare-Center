@@ -45,7 +45,7 @@ const ChildManagement = () => {
 
   const handleSubmitIncident = (e) => {
     e.preventDefault();
-    // Handle incident submission logic here
+    //  This is where we handle incident submission logic here
     setShowIncidentForm(false);
   };
 
@@ -56,7 +56,7 @@ const ChildManagement = () => {
         <p>Track attendance and report incidents</p>
       </div>
 
-      {/* Attendance Tracking Section */}
+      {/* Attendance Tracking Section is here! */}
       <div className="attendance-section">
         <div className="controls-bar">
           <div className="search-box">
