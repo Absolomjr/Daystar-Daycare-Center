@@ -7,7 +7,7 @@ const Assignments = () => {
   const navigate = useNavigate();
 
   const assignments = [
-    // Active Assignments
+    // Active Assignments to be attended to
     {
       id: 1,
       familyName: 'Doe Family',
