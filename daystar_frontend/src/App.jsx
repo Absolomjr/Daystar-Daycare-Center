@@ -6,7 +6,7 @@ import Register from './components/auth/Register';
 import BabysitterDashboard from './components/dashboard/babysitter/BabysitterDashboard';
 import ManagerDashboard from './components/dashboard/manager/ManagerDashboard';
 
-// Protected Route component
+// Protected Route component from authentic login
 const ProtectedRoute = ({ children, allowedUserType }) => {
   const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
   const userType = localStorage.getItem('userType');
@@ -28,24 +28,24 @@ const App = () => {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      
+
       {/* Protected Routes */}
-      <Route 
-        path="/babysitter-dashboard/*" 
+      <Route
+        path="/babysitter-dashboard/*"
         element={
           <ProtectedRoute allowedUserType="babysitter">
             <BabysitterDashboard />
           </ProtectedRoute>
-        } 
+        }
       />
-      
-      <Route 
-        path="/manager-dashboard/*" 
+
+      <Route
+        path="/manager-dashboard/*"
         element={
           <ProtectedRoute allowedUserType="manager">
             <ManagerDashboard />
           </ProtectedRoute>
-        } 
+        }
       />
     </Routes>
   );

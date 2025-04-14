@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchBabysittersStart, fetchBabysittersSuccess, fetchBabysittersFailure, deleteBabysitter } from '../../redux/slices/babysitterSlice';
 import api from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+// importing the above apis
 
 const BabysitterList = () => {
   const dispatch = useDispatch();
@@ -81,13 +82,13 @@ const BabysitterList = () => {
               </td>
               <td>
                 <div className="action-buttons">
-                  <button 
+                  <button
                     className="btn btn-edit"
                     onClick={() => navigate(`/babysitters/edit/${babysitter.id}`)}
                   >
                     Edit
                   </button>
-                  <button 
+                  <button
                     className="btn btn-delete"
                     onClick={() => handleDelete(babysitter.id)}
                   >
