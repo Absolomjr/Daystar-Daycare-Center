@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginSuccess, loginFailure, logout } from '../redux/slices/authSlice';
 import api from '../services/api';
+// imports for the authentication
 
 export const useAuth = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ export const useAuth = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      
+
       if (!token) {
         setLoading(false);
         return;
@@ -44,7 +45,7 @@ export const useAuth = () => {
       setError(null);
       const response = await api.post('/auth/login', { email, password });
       const { token, user } = response.data;
-      
+
       localStorage.setItem('token', token);
       dispatch(loginSuccess({ user, token }));
       navigate('/');
