@@ -4,12 +4,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const dotenv = require('dotenv');
 const db = require('./config/database');
-
-// // Load models
-// require('./models/User');
-// require('./models/Child');
-// require('./models/Attendance');
-// require('./models/Payment');
+const userRoutes = require('./routes/user');
 
 // Load environment variables
 dotenv.config();
@@ -31,21 +26,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Test route
-app.get('/api/test', (req, res) => {
-  res.json({ message: 'Server is running' });
-});
-
-// // Import routes
-// const authRoutes = require('./routes/auth');
-// const childrenRoutes = require('./routes/children');
-// const attendanceRoutes = require('./routes/attendance');
-// const paymentRoutes = require('./routes/payment');
-
-// // Use routes
-// app.use('/api/auth', authRoutes);
-// app.use('/api/children', childrenRoutes);
-// app.use('/api/attendance', attendanceRoutes);
-// app.use('/api/payments', paymentRoutes);
+app.use('/api', userRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -56,3 +37,7 @@ app.use((err, req, res, next) => {
 // Set port
 const PORT = process.env.PORT || 5000;
 
+// Start the server and listen on the port
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
