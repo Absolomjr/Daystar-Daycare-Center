@@ -1,9 +1,10 @@
 const express = require('express');
 const userRoutes = express.Router();
 const db = require('../config/database');
+const bcrypt = require('bcrypt');
 
 // POST create new user
-userRoutes.post('/register', (req, res) => {
+userRoutes.post('/register', async (req, res) => {
   const {
     firstName,
     lastName,
@@ -18,6 +19,8 @@ userRoutes.post('/register', (req, res) => {
   } = req.body;
 
   console.log(req.body)
+
+  const encryptedPassword = await bcrypt.hash(password, 10);
   
 
   // Fixing the column names and handling the fields correctly
@@ -29,7 +32,7 @@ userRoutes.post('/register', (req, res) => {
     firstName,
     lastName,
     email,
-    password,
+    encryptedPassword,
     role,
     nin || 'N/A', // If NIN is not provided, use 'N/A'
     date_of_birth || null, // If no date of birth is provided, use null

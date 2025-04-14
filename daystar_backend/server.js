@@ -5,6 +5,7 @@ const rateLimit = require('express-rate-limit');
 const dotenv = require('dotenv');
 const db = require('./config/database');
 const userRoutes = require('./routes/user');
+const loginRoutes = require('./routes/login');
 
 // Load environment variables
 dotenv.config();
@@ -27,6 +28,7 @@ app.use(limiter);
 
 // Test route
 app.use('/api', userRoutes);
+app.use('/api/users', loginRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
