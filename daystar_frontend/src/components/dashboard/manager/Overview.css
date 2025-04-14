@@ -24,6 +24,7 @@
   gap: 16px;
 }
 
+
 .action-card {
   display: flex;
   flex-direction: column;
@@ -271,6 +272,8 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+
+
 .stat-card:hover {
   transform: translateY(-2px);
 }
@@ -312,14 +315,14 @@
 .stat-details h3 {
   margin: 0 0 12px 0;
   font-size: 14px;
-  color: #6c757d;
+  color: white;
   font-weight: 500;
 }
 
 .main-stat {
   font-size: 24px;
   font-weight: 600;
-  color: #2c3e50;
+  color: #ffffff;
   display: block;
   margin-bottom: 8px;
 }
@@ -499,3 +502,7 @@ td {
     gap: 8px;
   }
 } 
+
+.halfday-stat, .fullday-stat, .leave-stat,.active-stat, .upcoming-stat, .completed-stat {
+  color:white;
+}
