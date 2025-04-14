@@ -1,0 +1,173 @@
+.confirm-availability-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.confirm-header {
+  margin-bottom: 30px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #4A90E2;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  padding: 0;
+  margin-bottom: 15px;
+}
+
+.back-button:hover {
+  color: #357ABD;
+}
+
+.confirm-header h2 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.confirm-header p {
+  margin: 10px 0 0;
+  color: #666;
+}
+
+.requests-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.request-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.request-card:hover {
+  transform: translateY(-5px);
+}
+
+.request-header {
+  padding: 15px;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.request-header h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.status-indicator {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  text-transform: capitalize;
+}
+
+.status-indicator.pending {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.status-indicator.confirmed {
+  background-color: #28a745;
+  color: white;
+}
+
+.status-indicator.declined {
+  background-color: #dc3545;
+  color: white;
+}
+
+.request-details {
+  padding: 20px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: #666;
+}
+
+.detail-row i {
+  width: 20px;
+  color: #4A90E2;
+}
+
+.detail-row.requirements {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.request-actions {
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid #eee;
+}
+
+.confirm-button,
+.decline-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: 500;
+}
+
+.confirm-button {
+  background-color: #28a745;
+  color: white;
+  flex: 2;
+}
+
+.confirm-button:hover {
+  background-color: #218838;
+}
+
+.decline-button {
+  background-color: #dc3545;
+  color: white;
+  flex: 1;
+}
+
+.decline-button:hover {
+  background-color: #c82333;
+}
+
+.response-message {
+  padding: 15px;
+  text-align: center;
+  background-color: #f8f9fa;
+  color: #666;
+  border-top: 1px solid #eee;
+}
+
+@media (max-width: 768px) {
+  .requests-container {
+    grid-template-columns: 1fr;
+  }
+
+  .request-actions {
+    flex-direction: column;
+  }
+
+  .confirm-button,
+  .decline-button {
+    width: 100%;
+  }
+} 
