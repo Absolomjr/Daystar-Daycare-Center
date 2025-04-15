@@ -4,9 +4,15 @@ import './ManagerDashboard.css';
 import './Overview.css';
 import BabysitterManagement from './BabysitterManagement';
 import FinancialManagement from './FinancialManagement';
+import AddBabysitterModal from './modals/AddBabysitterModal';
+import ScheduleSessionModal from './modals/ScheduleSessionModal';
+import ProcessPaymentModal from './modals/ProcessPaymentModal';
+import AddChildModal from './modals/AddChildModal';
 
 const ManagerDashboard = () => {
+  console.log('ManagerDashboard rendering');
   const [selectedSection, setSelectedSection] = useState('overview');
+  const [activeModal, setActiveModal] = useState(null);
 
   const handleLogout = () => {
     localStorage.clear();
@@ -40,6 +46,15 @@ const ManagerDashboard = () => {
           { id: 3, parent: "Mike Johnson", amount: 450000, date: "2024-03-14", status: "completed" }
         ]
       }
+    };
+
+    const handleModalClose = () => {
+      setActiveModal(null);
+    };
+
+    const handleModalSubmit = () => {
+      setActiveModal(null);
+      // You can add refresh logic here if needed
     };
 
     return (
@@ -148,25 +163,25 @@ const ManagerDashboard = () => {
         <div className="quick-actions-section">
           <h2>Quick Actions</h2>
           <div className="actions-grid">
-            <button className="action-button">
+            <button className="action-button" onClick={() => setActiveModal('addBabysitter')}>
               <div className="action-icon">
                 <FaUserPlus />
               </div>
               <span>Add Babysitter</span>
             </button>
-            <button className="action-button">
+            <button className="action-button" onClick={() => setActiveModal('scheduleSession')}>
               <div className="action-icon">
                 <FaCalendarPlus />
               </div>
               <span>Schedule Session</span>
             </button>
-            <button className="action-button">
+            <button className="action-button" onClick={() => setActiveModal('processPayment')}>
               <div className="action-icon">
                 <FaMoneyCheckAlt />
               </div>
               <span>Process Payment</span>
             </button>
-            <button className="action-button">
+            <button className="action-button" onClick={() => setActiveModal('addChild')}>
               <div className="action-icon">
                 <FaChild />
               </div>
@@ -208,6 +223,20 @@ const ManagerDashboard = () => {
             </table>
           </div>
         </div>
+
+        {/* Modals */}
+        {activeModal === 'addBabysitter' && (
+          <AddBabysitterModal onClose={handleModalClose} onSubmit={handleModalSubmit} />
+        )}
+        {activeModal === 'scheduleSession' && (
+          <ScheduleSessionModal onClose={handleModalClose} onSubmit={handleModalSubmit} />
+        )}
+        {activeModal === 'processPayment' && (
+          <ProcessPaymentModal onClose={handleModalClose} onSubmit={handleModalSubmit} />
+        )}
+        {activeModal === 'addChild' && (
+          <AddChildModal onClose={handleModalClose} onSubmit={handleModalSubmit} />
+        )}
       </div>
     );
   };

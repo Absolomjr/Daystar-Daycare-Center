@@ -111,6 +111,10 @@
   font-weight: 500;
   transition: background-color 0.2s ease;
 }
+a.logo {
+  color: white;
+}
+
 
 .logout-btn:hover {
   background-color: #d52a1a;

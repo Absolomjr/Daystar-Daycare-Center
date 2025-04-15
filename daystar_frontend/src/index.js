@@ -9,7 +9,7 @@ import reportWebVitals from './reportWebVitals';
 // Use the createRoot for React 18
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-// Render immediately
+// Render these immediately
 root.render(
   <React.StrictMode>
     <BrowserRouter>

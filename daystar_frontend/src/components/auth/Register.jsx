@@ -10,15 +10,16 @@ const Register = () => {
     password: '',
     confirmPassword: '',
     role: '',
-    nin: '',
-    dateOfBirth: '',
+    nin: null,
+    dateOfBirth: null,
     nextOfKin: {
-      name: '',
-      phoneNumber: '',
-      relationship: ''
+      name: null,
+      phoneNumber: null,
+      relationship: null
     }
   });
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const validateAge = (birthDate) => {
@@ -58,6 +59,16 @@ const Register = () => {
       return false;
     }
 
+    if (formData.password.length < 8) {
+      setError('Password must be at least 8 characters');
+      return false;
+    }
+
+    if (!validateEmail(formData.email)) {
+      setError('Please enter a valid email address');
+      return false;
+    }
+
     if (formData.role === 'babysitter') {
       if (!formData.nin) {
         setError('National ID Number is required for babysitters');
@@ -84,18 +95,55 @@ const Register = () => {
     return true;
   };
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setLoading(true);
 
     if (!validateForm()) {
+      setLoading(false);
       return;
     }
 
-    // Here you would typically make an API call to register the user
-    // For now, we'll just simulate success and redirect
-    localStorage.setItem('user', JSON.stringify(formData));
-    navigate(formData.role === 'manager' ? '/manager-dashboard' : '/babysitter-dashboard');
+    try {
+      const response = await fetch('http://localhost:5000/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const contentType = response.headers.get('content-type');
+      let data;
+
+      if (contentType && contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        console.error('Non-JSON response:', text);
+        throw new Error('Unexpected response from server.');
+      }
+
+      if (response.ok) {
+        localStorage.setItem('user', JSON.stringify(data.user));
+        navigate('/login');
+      } else {
+        console.error('Server responded with error:', data);
+        setError(data.message || 'Registration failed. Please try again.');
+      }
+
+    } catch (error) {
+      console.error('Network or processing error:', error);
+      setError(error.message || 'Something went wrong. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -263,7 +311,9 @@ const Register = () => {
             </div>
           )}
 
-          <button type="submit" className="register-button">Create Account</button>
+          <button type="submit" className="register-button" disabled={loading}>
+            {loading ? 'Creating Account...' : 'Create Account'}
+          </button>
         </form>
 
         <div className="register-footer">
