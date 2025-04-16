@@ -7,6 +7,7 @@ const db = require('./config/database');
 const userRoutes = require('./routes/user');
 const loginRoutes = require('./routes/login');
 const babysitterRoutes = require('./routes/babysitter');
+const profileRoutes = require('./routes/profile');
 
 // Load environment variables
 dotenv.config();
@@ -34,6 +35,7 @@ app.use('/api/users', loginRoutes);
 app.use('/api/babysitters', babysitterRoutes);
 const childRoutes = require('./routes/child');
 app.use('/api/children', childRoutes);
+app.use('/api/profile', profileRoutes);
 
 
 // Error handling middleware

@@ -1,20 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Profile.css';
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
-  
-  // Mock profile data
-  const [profileData, setProfileData] = useState({
-    name: 'Timothy Johnson',
-    email: 'timothy@gmail.com',
-    phone: '123-456-7890',
-    address: '123 Main St, Springfield',
-    bio: 'Experienced babysitter with a passion for childcare.',
-    qualifications: 'CPR Certified, Early Childhood Education',
-    experience: '5 years',
-    preferences: 'No pets, Non-smoker'
-  });
+  const [profileData, setProfileData] = useState(null);
+
+  const loggedInEmail = localStorage.getItem('userEmail')
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/profile/${loggedInEmail}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch profile data');
+        }
+        const data = await response.json();
+        setProfileData(data);
+      } catch (error) {
+        alert(`Error: ${error.message}`);
+      }
+    };
+
+    fetchProfile();
+  }, [loggedInEmail]);
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
@@ -29,111 +37,38 @@ const Profile = () => {
   };
 
   const handleSave = () => {
-    // Save the updated profile data
+    // Implement save functionality here
     setIsEditing(false);
   };
+
+  if (!profileData) return <div>Loading...</div>;
 
   return (
     <div className="profile-container">
       <h2>My Profile</h2>
       <div className="profile-card">
         <div className="profile-header">
-          <h3>{profileData.name}</h3>
+          <h3>{profileData.first_name} {profileData.last_name}</h3>
           <button onClick={handleEditToggle}>
             {isEditing ? 'Cancel' : 'Edit Profile'}
           </button>
         </div>
         <div className="profile-details">
-          <div className="profile-field">
-            <label>Email:</label>
-            {isEditing ? (
-              <input
-                type="email"
-                name="email"
-                value={profileData.email}
-                onChange={handleChange}
-              />
-            ) : (
-              <p>{profileData.email}</p>
-            )}
-          </div>
-          <div className="profile-field">
-            <label>Phone:</label>
-            {isEditing ? (
-              <input
-                type="tel"
-                name="phone"
-                value={profileData.phone}
-                onChange={handleChange}
-              />
-            ) : (
-              <p>{profileData.phone}</p>
-            )}
-          </div>
-          <div className="profile-field">
-            <label>Address:</label>
-            {isEditing ? (
-              <input
-                type="text"
-                name="address"
-                value={profileData.address}
-                onChange={handleChange}
-              />
-            ) : (
-              <p>{profileData.address}</p>
-            )}
-          </div>
-          <div className="profile-field">
-            <label>Bio:</label>
-            {isEditing ? (
-              <textarea
-                name="bio"
-                value={profileData.bio}
-                onChange={handleChange}
-              />
-            ) : (
-              <p>{profileData.bio}</p>
-            )}
-          </div>
-          <div className="profile-field">
-            <label>Qualifications:</label>
-            {isEditing ? (
-              <input
-                type="text"
-                name="qualifications"
-                value={profileData.qualifications}
-                onChange={handleChange}
-              />
-            ) : (
-              <p>{profileData.qualifications}</p>
-            )}
-          </div>
-          <div className="profile-field">
-            <label>Experience:</label>
-            {isEditing ? (
-              <input
-                type="text"
-                name="experience"
-                value={profileData.experience}
-                onChange={handleChange}
-              />
-            ) : (
-              <p>{profileData.experience}</p>
-            )}
-          </div>
-          <div className="profile-field">
-            <label>Preferences:</label>
-            {isEditing ? (
-              <input
-                type="text"
-                name="preferences"
-                value={profileData.preferences}
-                onChange={handleChange}
-              />
-            ) : (
-              <p>{profileData.preferences}</p>
-            )}
-          </div>
+          {['email', 'role', 'nin', 'date_of_birth', 'next_of_kin_name', 'next_of_kin_phone', 'next_of_kin_relationship'].map(field => (
+            <div className="profile-field" key={field}>
+              <label>{field.replace(/_/g, ' ').toUpperCase()}:</label>
+              {isEditing ? (
+                <input
+                  type="text"
+                  name={field}
+                  value={profileData[field] || ''}
+                  onChange={handleChange}
+                />
+              ) : (
+                <p>{profileData[field]}</p>
+              )}
+            </div>
+          ))}
         </div>
         {isEditing && (
           <button className="save-button" onClick={handleSave}>

@@ -42,7 +42,7 @@ const Login = () => {
       
       const data = await response.json(); // expecting a JSON object
       const user =JSON.stringify(data)
-      alert(user);
+      //alert(user);
       
       if (!response.ok || data.length === 0) {
         setError('Invalid email or password');
@@ -52,8 +52,9 @@ const Login = () => {
         // Save user info to localStorage
         localStorage.setItem('userType', data.userinfo.role);
         localStorage.setItem('userName', data.userinfo.first_name);
+        localStorage.setItem('userEmail', data.userinfo.email);
         localStorage.setItem('isLoggedIn', 'true');
-        alert(`isLoggedIn: ${data.userinfo.role}\n userType: ${localStorage.getItem('isLoggedIn')}`);
+        //alert(`isLoggedIn: ${data.userinfo.role}\n userType: ${localStorage.getItem('isLoggedIn')}`);
         // Navigate based on the user's role
         if (data.userinfo.role === 'manager') {
           navigate('/manager-dashboard');

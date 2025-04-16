@@ -48,7 +48,7 @@ db.connect((err) => {
   `;
 
   const createChildrenTable = `
-  CREATE TABLE children (
+  CREATE TABLE IF NOT EXISTS children (
   id INT AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255) NOT NULL,
