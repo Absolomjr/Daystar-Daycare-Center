@@ -8,6 +8,7 @@ const db = require('../config/database'); // adjust as necessary
 // User Login
 loginRoute.post('/login', async (req, res) => {
     const { email, password } = req.body;
+    console.log(req.body)
 
     if (!email || !password) {
       return res.status(400).json({ message: 'Please fill in all fields.' });
@@ -26,7 +27,7 @@ loginRoute.post('/login', async (req, res) => {
       }
   
       const user = results[0];
-  
+        // console.log(user)
       // Compare password with hash
       bcrypt.compare(password, user.password, (err, isMatch) => {
         if (err) {
@@ -39,16 +40,19 @@ loginRoute.post('/login', async (req, res) => {
         }
   
         // If everything checks out
-        res.status(200).json({
+        return res.status(200).json({
           message: 'Login successful!',
-          user: {
+          userinfo: {
             id: user.id,
             first_name: user.first_name,
             last_name: user.last_name,
             email: user.email,
             role: user.role
           }
+          
         });
+
+       
       });
     });
   });

@@ -1,50 +1,17 @@
-const Child = require('../models/Child');
-const Attendance = require('../models/Attendance');
+const Babysitter = require('../models/babysitterModel');
 
-const babysitterController = {
-  getAssignedChildren: async (req, res) => {
-    try {
-      const children = await Child.findAll({
-        include: [{
-          model: Attendance,
-          where: { babysitterId: req.user.id },
-          required: false
-        }]
-      });
-      res.json(children);
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching assigned children' });
-    }
-  },
+exports.addBabysitter = (req, res) => {
+  const { first_name, last_name, email, username, password } = req.body;
 
-  markAttendance: async (req, res) => {
-    try {
-      const { childId, type } = req.body;
-      
-      if (type === 'checkIn') {
-        await Attendance.create({
-          childId,
-          babysitterId: req.user.id,
-          checkIn: new Date()
-        });
-      } else {
-        await Attendance.update(
-          { checkOut: new Date() },
-          { 
-            where: { 
-              childId,
-              babysitterId: req.user.id,
-              checkOut: null
-            }
-          }
-        );
-      }
-
-      res.json({ message: 'Attendance marked successfully' });
-    } catch (error) {
-      res.status(500).json({ message: 'Error marking attendance' });
-    }
+  if (!first_name || !last_name || !email || !username || !password) {
+    return res.status(400).json({ message: 'All fields are required.' });
   }
-};
 
-module.exports = babysitterController;
+  Babysitter.createBabysitter(req.body, (err, result) => {
+    if (err) {
+      console.error('DB error:', err);
+      return res.status(500).json({ message: 'Database error.' });
+    }
+    res.status(201).json({ message: 'Babysitter added successfully!', id: result.insertId });
+  });
+};

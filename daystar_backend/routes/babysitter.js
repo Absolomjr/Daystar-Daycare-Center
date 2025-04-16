@@ -1,13 +1,8 @@
 const express = require('express');
-const router = express.Router();
+const babysitterRoutes = express.Router();
 const babysitterController = require('../controllers/babysitterController');
-const auth = require('../middleware/auth');
-const roleCheck = require('../middleware/roleCheck');
 
-router.use(auth);
-router.use(roleCheck(['babysitter']));
+// Add babysitter from form
+babysitterRoutes.post('/add', babysitterController.addBabysitter);
 
-router.get('/assigned-children', babysitterController.getAssignedChildren);
-router.post('/mark-attendance', babysitterController.markAttendance);
-
-module.exports = router; 
+module.exports = babysitterRoutes;

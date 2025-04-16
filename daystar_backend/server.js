@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const db = require('./config/database');
 const userRoutes = require('./routes/user');
 const loginRoutes = require('./routes/login');
+const babysitterRoutes = require('./routes/babysitter');
 
 // Load environment variables
 dotenv.config();
@@ -29,6 +30,9 @@ app.use(limiter);
 // Test route
 app.use('/api', userRoutes);
 app.use('/api/users', loginRoutes);
+
+app.use('/api/babysitters', babysitterRoutes);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {

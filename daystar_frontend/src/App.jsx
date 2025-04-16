@@ -16,6 +16,7 @@ const ProtectedRoute = ({ children, allowedUserType }) => {
   }
 
   if (allowedUserType && userType !== allowedUserType) {
+    alert(`isLoggedIn: ${isLoggedIn}\nuserType: ${userType}`);
     return <Navigate to="/" />;
   }
 
@@ -31,7 +32,7 @@ const App = () => {
 
       {/* Protected Routes */}
       <Route
-        path="/babysitter-dashboard/*"
+        path="/babysitter-dashboard/"
         element={
           <ProtectedRoute allowedUserType="babysitter">
             <BabysitterDashboard />
@@ -51,4 +52,5 @@ const App = () => {
   );
 };
 
-export default App; 
+export default App;
+export { ProtectedRoute };

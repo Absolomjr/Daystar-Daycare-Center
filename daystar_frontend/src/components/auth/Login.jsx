@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -13,7 +12,7 @@ const Login = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
       [name]: value
     }));
@@ -33,33 +32,39 @@ const Login = () => {
     }
 
     try {
-      // Manager login check
-      if (formData.email === 'hummy@gmail.com' && formData.password === 'hummy123') {
-        // Store manager info in localStorage
-        localStorage.setItem('userType', 'manager');
-        localStorage.setItem('userName', 'Hummy');
-        localStorage.setItem('isLoggedIn', 'true');
+      const response = await fetch('http://localhost:5000/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      const data = await response.json(); // expecting a JSON object
+      const user =JSON.stringify(data)
+      alert(user);
+      
+      if (!response.ok || data.length === 0) {
+        setError('Invalid email or password');
+      } else {
         
-        // Navigate to manager dashboard
-        navigate('/manager-dashboard');
-        return;
-      }
 
-      // Babysitter login check
-      if (formData.email === 'timothy@gmail.com' && formData.password === 'timothy123') {
-        // Store babysitter info in localStorage
-        localStorage.setItem('userType', 'babysitter');
-        localStorage.setItem('userName', 'Timothy');
+        // Save user info to localStorage
+        localStorage.setItem('userType', data.userinfo.role);
+        localStorage.setItem('userName', data.userinfo.first_name);
         localStorage.setItem('isLoggedIn', 'true');
-        
-        // Navigate to babysitter dashboard
-        navigate('/babysitter-dashboard');
-        return;
+        alert(`isLoggedIn: ${data.userinfo.role}\n userType: ${localStorage.getItem('isLoggedIn')}`);
+        // Navigate based on the user's role
+        if (data.userinfo.role === 'manager') {
+          navigate('/manager-dashboard');
+        } else if (data.userinfo.role === 'babysitter') {
+          navigate('/babysitter-dashboard');
+        } else {
+          navigate('/');
+        }
       }
-
-      // If credentials don't match
-      setError('Invalid email or password');
     } catch (error) {
+      console.error('Login error:', error);
       setError('An error occurred. Please try again.');
     } finally {
       setIsLoading(false);
@@ -105,16 +110,12 @@ const Login = () => {
 
           {error && <div className="error-message">{error}</div>}
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className={`login-button ${isLoading ? 'loading' : ''}`}
             disabled={isLoading}
           >
-            {isLoading ? (
-              <span className="loading-spinner"></span>
-            ) : (
-              'Sign In'
-            )}
+            {isLoading ? <span className="loading-spinner"></span> : 'Sign In'}
           </button>
         </form>
 
