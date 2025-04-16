@@ -56,7 +56,7 @@ const ChildManagement = () => {
         <p>Track attendance and report incidents</p>
       </div>
 
-      {/* Attendance Tracking Section is here! */}
+      {/* This is the attendance Tracking Section is here! */}
       <div className="attendance-section">
         <div className="controls-bar">
           <div className="search-box">

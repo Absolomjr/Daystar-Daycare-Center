@@ -6,7 +6,7 @@ import App from './App';
 import './styles/global.css';
 import reportWebVitals from './reportWebVitals';
 
-// Use createRoot for React 18
+// Use the createRoot for React 18
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // Render these immediately
