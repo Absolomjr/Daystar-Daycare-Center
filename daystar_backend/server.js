@@ -9,7 +9,7 @@ const loginRoutes = require('./routes/login');
 const babysitterRoutes = require('./routes/babysitter');
 const profileRoutes = require('./routes/profile');
 const profileRoute  = require('./routes/profile');
-
+const childRoutes = require('./routes/child')
 // Load environment variables
 dotenv.config();
 
@@ -34,7 +34,6 @@ app.use('/api', userRoutes);
 app.use('/api/users', loginRoutes);
 
 app.use('/api/babysitters', babysitterRoutes);
-const childRoutes = require('./routes/child');
 app.use('/api/children', childRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/profile', profileRoute);

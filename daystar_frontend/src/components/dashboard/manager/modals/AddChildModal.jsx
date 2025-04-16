@@ -15,26 +15,34 @@ const AddChildModal = ({ onClose, onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token'); // Assuming you store your token in localStorage after login
-  
-      const response = await fetch('http://localhost:5000/api/children', {
+        
+      const response = await fetch('http://localhost:5000/api/children/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-  
+      
       if (!response.ok) {
-        throw new Error('Failed to add child');
+        const errorText = await response.text();
+        alert(`Failed to add child. Server responded with: ${response.status} ${response.statusText}\nDetails: ${errorText}`);
+        return;
       }
-  
+      
+      alert('Child added successfully!');
       onSubmit();
       onClose();
     } catch (error) {
-      console.error('Error adding child:', error);
+      if (error.name === 'TypeError') {
+        alert('Network error. Please check your connection or if the server is running.');
+      } else {
+        alert('An unexpected error occurred: ' + error.message);
+      }
     }
   };
+  
+  
   
 
   return (
