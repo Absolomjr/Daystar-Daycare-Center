@@ -1,5 +1,6 @@
 const express = require('express');
 const profileRoutes = express.Router();
+const profileRoute = express.Router();
 const db = require('../config/database');
 
 // GET babysitter profile by id
@@ -22,4 +23,31 @@ console.log(babysitterEmail)
   });
 });
 
-module.exports = profileRoutes;
+profileRoute.put('/api/profile/:email', (req, res) => {
+    const { email } = req.params;
+    const { first_name, last_name, role, nin, date_of_birth, next_of_kin_name, next_of_kin_phone, next_of_kin_relationship } = req.body;
+  
+    // Validate the data
+    if (!first_name || !last_name || !role) {
+      return res.status(400).json({ message: 'First Name, Last Name, and Role are required' });
+    }
+  
+    // Update profile in MySQL database
+    db.query(
+      'UPDATE users SET first_name = ?, last_name = ?, role = ?, nin = ?, date_of_birth = ?, next_of_kin_name = ?, next_of_kin_phone = ?, next_of_kin_relationship = ? WHERE email = ?',
+      [first_name, last_name, role, nin, date_of_birth, next_of_kin_name, next_of_kin_phone, next_of_kin_relationship, email],
+      (err, results) => {
+        if (err) {
+          return res.status(500).json({ message: 'Failed to update profile' });
+        }
+  
+        if (results.affectedRows === 0) {
+          return res.status(404).json({ message: 'Profile not found' });
+        }
+  
+        res.json({ message: 'Profile updated successfully' });
+      }
+    );
+  });
+
+module.exports = profileRoutes, profileRoute;

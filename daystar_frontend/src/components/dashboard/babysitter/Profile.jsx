@@ -4,8 +4,7 @@ import './Profile.css';
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState(null);
-
-  const loggedInEmail = localStorage.getItem('userEmail')
+  const loggedInEmail = localStorage.getItem('userEmail');
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -32,13 +31,28 @@ const Profile = () => {
     const { name, value } = e.target;
     setProfileData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSave = () => {
-    // Implement save functionality here
-    setIsEditing(false);
+    fetch(`http://localhost:5000/api/profile/${loggedInEmail}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(profileData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to update profile');
+        }
+        alert('Profile updated successfully');
+        setIsEditing(false);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
 
   if (!profileData) return <div>Loading...</div>;
@@ -54,7 +68,7 @@ const Profile = () => {
           </button>
         </div>
         <div className="profile-details">
-          {['email', 'role', 'nin', 'date_of_birth', 'next_of_kin_name', 'next_of_kin_phone', 'next_of_kin_relationship'].map(field => (
+          {['email', 'role', 'nin', 'date_of_birth', 'next_of_kin_name', 'next_of_kin_phone', 'next_of_kin_relationship'].map((field) => (
             <div className="profile-field" key={field}>
               <label>{field.replace(/_/g, ' ').toUpperCase()}:</label>
               {isEditing ? (
