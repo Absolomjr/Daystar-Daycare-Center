@@ -32,6 +32,8 @@ app.use('/api', userRoutes);
 app.use('/api/users', loginRoutes);
 
 app.use('/api/babysitters', babysitterRoutes);
+const childRoutes = require('./routes/child');
+app.use('/api/children', childRoutes);
 
 
 // Error handling middleware

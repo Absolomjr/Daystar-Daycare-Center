@@ -15,6 +15,8 @@ const AddChildModal = ({ onClose, onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem('token'); // Assuming you store your token in localStorage after login
+  
       const response = await fetch('http://localhost:5000/api/children', {
         method: 'POST',
         headers: {
@@ -22,17 +24,18 @@ const AddChildModal = ({ onClose, onSubmit }) => {
         },
         body: JSON.stringify(formData),
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to add child');
       }
-
+  
       onSubmit();
       onClose();
     } catch (error) {
       console.error('Error adding child:', error);
     }
   };
+  
 
   return (
     <div className="modal-overlay">

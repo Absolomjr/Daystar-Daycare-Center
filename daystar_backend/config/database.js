@@ -70,6 +70,15 @@ db.connect((err) => {
     console.log('Users table created or already exists');
   });
 
+  db.query(createChildrenTable, (err, result) => {
+    if (err) {
+      console.error('Error creating users table:', err);
+      return;
+    }
+    console.log('Users table created or already exists');
+  });
+
+
   // Create 'babysitters' table
   db.query(createBabysitterTable, (err, result) => {
     if (err) {

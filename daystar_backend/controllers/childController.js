@@ -1,107 +1,17 @@
-const Child = require('../models/Child');
-const User = require('../models/User');
+const Child = require('../models/childModel');
 
-const childController = {
-  registerChild: async (req, res) => {
-    try {
-      const { firstName, lastName, dateOfBirth, gender, allergies, specialNeeds, parentId } = req.body;
+exports.addChild = (req, res) => {
+  const { first_name, last_name, date_of_birth, gender, parent_email, allergies, special_needs } = req.body;
 
-      const child = await Child.create({
-        firstName,
-        lastName,
-        dateOfBirth,
-        gender,
-        allergies,
-        specialNeeds,
-        parentId
-      });
-
-      res.status(201).json({
-        message: 'Child registered successfully',
-        child
-      });
-    } catch (error) {
-      console.error('Child registration error:', error);
-      res.status(500).json({ message: 'Error registering child' });
-    }
-  },
-
-  getAllChildren: async (req, res) => {
-    try {
-      const children = await Child.findAll({
-        include: [{
-          model: User,
-          as: 'parent',
-          attributes: ['firstName', 'lastName', 'email']
-        }]
-      });
-      res.json(children);
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching children' });
-    }
-  },
-
-  getChildById: async (req, res) => {
-    try {
-      const child = await Child.findByPk(req.params.id, {
-        include: [{
-          model: User,
-          as: 'parent',
-          attributes: ['firstName', 'lastName', 'email']
-        }]
-      });
-
-      if (!child) {
-        return res.status(404).json({ message: 'Child not found' });
-      }
-
-      res.json(child);
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching child details' });
-    }
-  },
-
-  updateChild: async (req, res) => {
-    try {
-      const { firstName, lastName, dateOfBirth, gender, allergies, specialNeeds } = req.body;
-      const child = await Child.findByPk(req.params.id);
-
-      if (!child) {
-        return res.status(404).json({ message: 'Child not found' });
-      }
-
-      await child.update({
-        firstName,
-        lastName,
-        dateOfBirth,
-        gender,
-        allergies,
-        specialNeeds
-      });
-
-      res.json({
-        message: 'Child information updated successfully',
-        child
-      });
-    } catch (error) {
-      res.status(500).json({ message: 'Error updating child information' });
-    }
-  },
-
-  deleteChild: async (req, res) => {
-    try {
-      const child = await Child.findByPk(req.params.id);
-
-      if (!child) {
-        return res.status(404).json({ message: 'Child not found' });
-      }
-
-      await child.destroy();
-      res.json({ message: 'Child removed successfully' });
-    } catch (error) {
-      res.status(500).json({ message: 'Error removing child' });
-    }
+  if (!first_name || !last_name || !date_of_birth || !gender || !parent_email) {
+    return res.status(400).json({ message: 'All required fields must be filled.' });
   }
-};
 
-module.exports = childController;
+  Child.createChild(req.body, (err, result) => {
+    if (err) {
+      console.error('Database error:', err);
+      return res.status(500).json({ message: 'Database error.' });
+    }
+    res.status(201).json({ message: 'Child added successfully!', id: result.insertId });
+  });
+};
