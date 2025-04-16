@@ -13,20 +13,26 @@ const AddBabysitterModal = ({ onClose, onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/auth/register', {
+      const response = await fetch('http://localhost:5000/api/babysitters/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ...formData,
-          role: 'babysitter'
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          username: formData.username,
+          password: formData.password,
         }),
       });
 
       if (!response.ok) {
         throw new Error('Failed to add babysitter');
       }
+
+      const result = await response.json();
+      console.log('Babysitter added successfully:', result);
 
       onSubmit();
       onClose();
@@ -46,7 +52,7 @@ const AddBabysitterModal = ({ onClose, onSubmit }) => {
               type="text"
               required
               value={formData.firstName}
-              onChange={(e) => setFormData({...formData, firstName: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
             />
           </div>
           <div className="form-group">
@@ -55,7 +61,7 @@ const AddBabysitterModal = ({ onClose, onSubmit }) => {
               type="text"
               required
               value={formData.lastName}
-              onChange={(e) => setFormData({...formData, lastName: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
             />
           </div>
           <div className="form-group">
@@ -64,7 +70,7 @@ const AddBabysitterModal = ({ onClose, onSubmit }) => {
               type="email"
               required
               value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             />
           </div>
           <div className="form-group">
@@ -73,7 +79,7 @@ const AddBabysitterModal = ({ onClose, onSubmit }) => {
               type="text"
               required
               value={formData.username}
-              onChange={(e) => setFormData({...formData, username: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
             />
           </div>
           <div className="form-group">
@@ -82,7 +88,7 @@ const AddBabysitterModal = ({ onClose, onSubmit }) => {
               type="password"
               required
               value={formData.password}
-              onChange={(e) => setFormData({...formData, password: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             />
           </div>
           <div className="modal-actions">

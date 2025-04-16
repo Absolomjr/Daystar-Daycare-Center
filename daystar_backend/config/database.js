@@ -47,6 +47,20 @@ db.connect((err) => {
     );
   `;
 
+  const createChildrenTable = `
+  CREATE TABLE children (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
+  date_of_birth DATE NOT NULL,
+  gender ENUM('Male', 'Female', 'Other') NOT NULL,
+  parent_email VARCHAR(255) NOT NULL,
+  allergies TEXT,
+  special_needs TEXT
+);
+
+`;
+
   // Create 'users' table
   db.query(createUserTable, (err, result) => {
     if (err) {
