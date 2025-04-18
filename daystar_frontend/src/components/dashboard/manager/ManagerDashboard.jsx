@@ -9,6 +9,8 @@ import ScheduleSessionModal from './modals/ScheduleSessionModal';
 import ProcessPaymentModal from './modals/ProcessPaymentModal';
 import AddChildModal from './modals/AddChildModal';
 
+// above is the importation of components
+
 const ManagerDashboard = () => {
   console.log('ManagerDashboard rendering');
   const [selectedSection, setSelectedSection] = useState('overview');
