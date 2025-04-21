@@ -32,7 +32,7 @@ ChartJS.register(
 const FinancialManagement = () => {
   const [activeSection, setActiveSection] = useState('overview');
 
-  // Mock financial data
+  // Mock financial data that was used
   const financialData = {
     income: {
       total: 15000000,
