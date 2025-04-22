@@ -5,7 +5,7 @@ const auth = (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');
     
     if (!token) {
-      return res.status(401).json({ message: 'No authentication token, access denied' });
+      return res.status(401).json({ message: 'No authentication token, access denied' });//returns no authentication token
     }
 
     const verified = jwt.verify(token, process.env.JWT_SECRET);
