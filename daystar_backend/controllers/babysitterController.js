@@ -8,7 +8,7 @@ exports.addBabysitter = (req, res) => {
     return res.status(400).json({ message: 'All fields are required.' });
   }
 
-  // Hash the password before saving it
+  // Hashes the password before saving it
   bcrypt.hash(password, 10, (err, hashedPassword) => {
     if (err) {
       console.error('Password hashing error:', err);
