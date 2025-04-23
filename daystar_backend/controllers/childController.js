@@ -24,8 +24,8 @@ exports.addChild  = (req, res) => {
     dateOfBirth,
     gender,
     parentEmail,
-    allergies || 'N/A',   // Default 'N/A' if allergies are not provided
-    specialNeeds || 'N/A'  // Default 'N/A' if special needs are not provided
+    allergies || 'N/A',   // Default 'N/A' if allergies are not provided by the user
+    specialNeeds || 'N/A'  // Default 'N/A' if special needs are not provided by the user
   ], (err, result) => {
     if (err) {
       console.error('Error inserting child: ', err);

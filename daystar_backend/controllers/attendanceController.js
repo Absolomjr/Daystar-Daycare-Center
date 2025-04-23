@@ -10,7 +10,7 @@ const attendanceController = {
       const babysitterId = req.user.id;
 
       if (type === 'checkIn') {
-        // Check if child has already been checked in
+        // Check if child has already been checked into another session
         const existingCheckIn = await Attendance.findOne({
           where: {
             childId,
