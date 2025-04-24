@@ -7,7 +7,7 @@ const auth = require('../middleware/auth');
 const roleCheck = require('../middleware/roleCheck');
 // Apply authentication middleware to all routes in this router
 router.use(auth);
-// Apply role-based access control, allowing only users with the 'manager' role
+// Applying role-based access control, allowing only users with the 'manager' role
 router.use(roleCheck(['manager']));
 // Route to fetch dashboard statistics for managers
 router.get('/dashboard-stats', managerController.getDashboardStats);

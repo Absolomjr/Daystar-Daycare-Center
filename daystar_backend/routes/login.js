@@ -28,7 +28,7 @@ loginRoute.post('/login', async (req, res) => {
   
       const user = results[0];
         // console.log(user)
-      // Compare password with hash
+      // Compares the  password with the hash
       bcrypt.compare(password, user.password, (err, isMatch) => {
         if (err) {
           console.error('Password comparison error:', err);
