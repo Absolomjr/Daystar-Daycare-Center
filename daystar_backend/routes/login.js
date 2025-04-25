@@ -5,7 +5,7 @@ const mysql = require('mysql2');
 
 const db = require('../config/database'); // adjust as necessary
 
-// User Login
+// The User Login
 loginRoute.post('/login', async (req, res) => {
     const { email, password } = req.body;
     console.log(req.body)
@@ -28,7 +28,7 @@ loginRoute.post('/login', async (req, res) => {
   
       const user = results[0];
         // console.log(user)
-      // Compares the  password with the hash
+      // helps to Compares the  password with the hash
       bcrypt.compare(password, user.password, (err, isMatch) => {
         if (err) {
           console.error('Password comparison error:', err);
