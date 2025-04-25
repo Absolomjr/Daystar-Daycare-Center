@@ -3,7 +3,7 @@ const profileRoutes = express.Router();
 const profileRoute = express.Router();
 const db = require('../config/database');
 
-// GET babysitter profile by id
+// helps to GET babysitter profile by id
 profileRoutes.get('/:email', (req, res) => {
   const babysitterEmail = req.params.email;
 console.log(babysitterEmail)
@@ -11,7 +11,7 @@ console.log(babysitterEmail)
 
   db.query(sql, [babysitterEmail], (err, results) => {
     if (err) {
-      console.error('Error fetching babysitter profile:', err);
+      console.error('Error fetching the babysitter profile:', err);
       return res.status(500).json({ error: 'Internal server error' });
     }
 
@@ -32,7 +32,7 @@ profileRoute.put('/api/profile/:email', (req, res) => {
       return res.status(400).json({ message: 'First Name, Last Name, and Role are required' });
     }
   
-    // Update profile in MySQL database
+    // helps to Update profile in MySQL database
     db.query(
       'UPDATE users SET first_name = ?, last_name = ?, role = ?, nin = ?, date_of_birth = ?, next_of_kin_name = ?, next_of_kin_phone = ?, next_of_kin_relationship = ? WHERE email = ?',
       [first_name, last_name, role, nin, date_of_birth, next_of_kin_name, next_of_kin_phone, next_of_kin_relationship, email],
