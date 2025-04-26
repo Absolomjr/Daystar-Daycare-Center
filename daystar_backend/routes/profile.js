@@ -27,7 +27,7 @@ profileRoute.put('/api/profile/:email', (req, res) => {
     const { email } = req.params;
     const { first_name, last_name, role, nin, date_of_birth, next_of_kin_name, next_of_kin_phone, next_of_kin_relationship } = req.body;
   
-    // Validate the data
+    // Validating the data
     if (!first_name || !last_name || !role) {
       return res.status(400).json({ message: 'First Name, Last Name, and Role are required' });
     }
