@@ -15,7 +15,7 @@ const BabysitterForm = () => {
     lastName: '',
     email: '',
     phone: '',
-    nin: '', // National Identification Number
+    nin: '', //  This requires the National Identification Number(NIN)
     age: '',
     nextOfKin: {
       name: '',
