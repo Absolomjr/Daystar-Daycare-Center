@@ -181,7 +181,7 @@ const BabysitterForm = () => {
             />
           </div>
         </div>
-
+              {/* required next of kin information */}
         <h3>Next of Kin Information</h3>
         <div className="form-row">
           <div className="form-group">
