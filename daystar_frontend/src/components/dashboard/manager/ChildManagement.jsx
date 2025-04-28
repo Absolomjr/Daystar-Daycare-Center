@@ -18,7 +18,7 @@ const ChildManagement = () => {
   const [showIncidentForm, setShowIncidentForm] = useState(false);
   const [selectedChild, setSelectedChild] = useState(null);
 
-  // Mock data - replace with your actual data
+  // Mock data which can be replaced with your actual data
   const childrenData = [
     {
       id: 1,
@@ -30,7 +30,7 @@ const ChildManagement = () => {
       checkIn: "08:30 AM",
       checkOut: "05:30 PM"
     },
-    // Add more children data
+    // More children can be added
   ];
 
   const renderAttendanceTracking = () => {
