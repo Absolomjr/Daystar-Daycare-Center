@@ -5,7 +5,7 @@ export const helpers = {
     return `UGX ${Number(amount).toLocaleString()}`;
   },
 
-  // Format date to local string
+  // Formatting the  date to local string
   formatDate: (date) => {
     return new Date(date).toLocaleDateString('en-UG', {
       year: 'numeric',
@@ -14,7 +14,7 @@ export const helpers = {
     });
   },
 
-  // Calculate age from date of birth
+  // Calculating the  age from date of birth
   calculateAge: (dob) => {
     const today = new Date();
     const birthDate = new Date(dob);
@@ -44,7 +44,7 @@ export const helpers = {
     return slots;
   },
 
-  // Calculate payment based on session type
+  // Calculating the payment based on session type
   calculatePayment: (sessionType, days) => {
     const rates = {
       'half-day': 2000,
