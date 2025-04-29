@@ -53,7 +53,7 @@ export const helpers = {
     return rates[sessionType] * days;
   },
 
-  // Generate unique reference number
+  // Generating the  unique reference number
   generateReference: (prefix = 'PAY') => {
     return `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`.toUpperCase();
   }
