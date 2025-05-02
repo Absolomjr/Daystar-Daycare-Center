@@ -25,7 +25,7 @@ body {
 .content {
   flex: 1;
   padding: 24px;
-  margin-left: 240px; /* Width of sidebar */
+  margin-left: 240px; /* Helps to style the Width of sidebar */
 }
 
 .auth-container {
