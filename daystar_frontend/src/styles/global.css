@@ -19,7 +19,7 @@ body {
 .main-container {
   display: flex;
   flex: 1;
-  padding-top: 64px; /* Height of navbar */
+  padding-top: 64px; /* Helps to style the Height of navbar */
 }
 
 .content {
