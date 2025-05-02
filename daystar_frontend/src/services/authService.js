@@ -1,6 +1,6 @@
 import api from './api';
 
-// async function forlogin, register, and other auth - related actions
+// async function for  login, register, and other auth - related actions
 export const authService = {
   async login(email, password) {
     const response = await api.post('/auth/login', { email, password });
