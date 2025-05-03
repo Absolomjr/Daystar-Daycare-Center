@@ -6,7 +6,7 @@ export const useForm = (initialValues = {}, validationRules = {}) => {
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
 
-  // Handle input change
+  //  Handle input change//
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
     setValues(prev => ({
