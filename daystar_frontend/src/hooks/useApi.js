@@ -7,7 +7,7 @@ export const useApi = () => {
   const [error, setError] = useState(null);
   const { error: showError } = useNotification();
 
-  // Generic API call handler
+  //  This is a Generic API call handler
   const callApi = useCallback(async (
     method,
     endpoint,
