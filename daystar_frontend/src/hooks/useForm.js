@@ -37,7 +37,7 @@ export const useForm = (initialValues = {}, validationRules = {}) => {
     }
   }, [values, validationRules]);
 
-  // Validate a single field
+  // Validates a single field
   const validateField = useCallback((fieldName, value) => {
     const rules = validationRules[fieldName];
     if (!rules) return true;
@@ -64,7 +64,7 @@ export const useForm = (initialValues = {}, validationRules = {}) => {
     return !fieldError;
   }, [validationRules]);
 
-  // Validate all fields
+  // Validates all fields
   const validateForm = useCallback(() => {
     const newErrors = {};
     let isValid = true;
