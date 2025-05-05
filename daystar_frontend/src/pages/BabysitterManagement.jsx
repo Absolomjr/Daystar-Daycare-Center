@@ -23,7 +23,7 @@ const BabysitterManagement = () => {
         </div>
       </div>
 
-      {/* Navigation Tabs */}
+      {/* The Navigation Tabs */}
       <div className="tab-navigation">
         <button 
           className={`tab-btn ${activeTab === 'list' ? 'active' : ''}`}
