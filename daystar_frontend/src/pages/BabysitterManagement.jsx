@@ -10,7 +10,7 @@ const BabysitterManagement = () => {
 
   return (
     <div className="babysitter-management">
-      {/* p */}
+      {/* The Page Header  */}
       <div className="page-header">
         <h1>Babysitter Management</h1>
         <div className="page-actions">
