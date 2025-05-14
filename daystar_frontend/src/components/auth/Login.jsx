@@ -24,7 +24,7 @@ const Login = () => {
     setIsLoading(true);
     setError('');
 
-    // Basic validation
+    // b
     if (!formData.email || !formData.password) {
       setError('Please fill in all fields');
       setIsLoading(false);
@@ -41,8 +41,7 @@ const Login = () => {
       });
       
       const data = await response.json(); // expecting a JSON object
-      const user =JSON.stringify(data)
-      //alert(user);
+      //alert(data);
       
       if (!response.ok || data.length === 0) {
         setError('Invalid email or password');

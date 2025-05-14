@@ -4,7 +4,6 @@ import './Schedule.css';
 
 const Schedule = () => {
   const navigate = useNavigate();
-  const [selectedDate, setSelectedDate] = useState(new Date());
 
   // Mock schedule data
   const scheduleData = {
