@@ -24,7 +24,7 @@ const Login = () => {
     setIsLoading(true);
     setError('');
 
-    // bas
+    // Basic validation
     if (!formData.email || !formData.password) {
       setError('Please fill in all fields');
       setIsLoading(false);
