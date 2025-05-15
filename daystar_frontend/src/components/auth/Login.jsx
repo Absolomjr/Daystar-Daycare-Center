@@ -41,7 +41,7 @@ const Login = () => {
       });
       
       const data = await response.json(); // expecting a JSON object
-      alert(data);
+      //alert(data);
       
       if (!response.ok || data.length === 0) {
         setError('Invalid email or password');
