@@ -13,7 +13,7 @@ const childRoutes = require('./routes/child')
 // Load environment variables
 dotenv.config();
 
-Initialize express
+// Initialize express
 const app = express();
 
 // Basic middleware
