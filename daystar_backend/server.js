@@ -29,7 +29,7 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-// Test route
+Test route
 app.use('/api', userRoutes);
 app.use('/api/users', loginRoutes);
 
