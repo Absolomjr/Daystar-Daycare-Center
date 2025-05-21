@@ -12,7 +12,7 @@ const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    Fetch dashboard statistics
+    // Fetch dashboard statistics
     const fetchStats = async () => {
       try {
         // API call to fetch statistics would go here
