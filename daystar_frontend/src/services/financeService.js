@@ -1,5 +1,5 @@
 import api from './api';
-importing the services api
+// importing the services api
 export const financeService = {
   async getFinancialSummary(period) {
     const response = await api.get(`/finances/summary?period=${period}`);
