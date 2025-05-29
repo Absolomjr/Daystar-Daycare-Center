@@ -42,4 +42,4 @@ export const theme = {
   },
 };
 
-The theme component
+// The theme component
