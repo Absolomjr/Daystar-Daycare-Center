@@ -44,7 +44,7 @@ export const helpers = {
     return slots;
   },
 
-  // Calculating the payment based on session type
+  Calculating the payment based on session type
   calculatePayment: (sessionType, days) => {
     const rates = {
       'half-day': 2000,
