@@ -27,7 +27,7 @@ export const helpers = {
     return age;
   },
 
-  Generate time slots for scheduling
+  // Generate time slots for scheduling
   generateTimeSlots: (startTime = '07:00', endTime = '18:00', interval = 30) => {
     const slots = [];
     let start = new Date(`2000-01-01 ${startTime}`);
