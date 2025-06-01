@@ -14,7 +14,7 @@ export const helpers = {
     });
   },
 
-  Calculating the  age from date of birth
+  // Calculating the  age from date of birth
   calculateAge: (dob) => {
     const today = new Date();
     const birthDate = new Date(dob);
