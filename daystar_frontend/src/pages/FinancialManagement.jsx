@@ -9,7 +9,7 @@ const FinancialManagement = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('payments');
 
-  // Calculate current month's financial summary
+  Calculate current month's financial summary
   const [summary, setSummary] = useState({
     totalIncome: 0,
     totalExpenses: 0,
