@@ -44,4 +44,4 @@ const authSlice = createSlice({
 
 export const { loginStart, loginSuccess, loginFailure, logout, updateUser } = authSlice.actions;
 export default authSlice.reducer;
-// this exports the reducer function to be used in the store configuration. The actions can be dispatched in your components to manage authentication state.
+this exports the reducer function to be used in the store configuration. The actions can be dispatched in your components to manage authentication state.
