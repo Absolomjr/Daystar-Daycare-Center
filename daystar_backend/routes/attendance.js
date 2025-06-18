@@ -10,7 +10,7 @@ router.use(auth);
 router.post('/mark', roleCheck(['manager', 'babysitter']), attendanceController.markAttendance);
 router.get('/history', roleCheck(['manager', 'babysitter']), attendanceController.getAttendanceHistory);
 
-// Routes accessible only by managers
+// Routes accessible by only by managers
 router.get('/daily-report', roleCheck(['manager']), attendanceController.getDailyReport);
 
 router.post('/schedule', auth, roleCheck(['manager']), attendanceController.scheduleSession);
