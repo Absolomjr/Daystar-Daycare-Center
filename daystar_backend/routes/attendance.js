@@ -6,7 +6,7 @@ const roleCheck = require('../middleware/roleCheck');
 
 router.use(auth);
 
-Routes accessible by both the managers and the babysitters
+// Routes accessible by both the managers and the babysitters
 router.post('/mark', roleCheck(['manager', 'babysitter']), attendanceController.markAttendance);
 router.get('/history', roleCheck(['manager', 'babysitter']), attendanceController.getAttendanceHistory);
 
