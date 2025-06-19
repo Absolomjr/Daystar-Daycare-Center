@@ -4,7 +4,7 @@ const Child = require('./Child');
 const Attendance = require('./Attendance');
 const Payment = require('./Payment');
 
-// Define associations
+Define associations
 User.hasMany(Child, { foreignKey: 'parentId' });
 Child.belongsTo(User, { as: 'parent', foreignKey: 'parentId' });
 
