@@ -38,7 +38,7 @@ export const useApi = () => {
     }
   }, [showError]);
 
-  GET request
+  // GET request
   const get = useCallback((endpoint, options) => {
     return callApi('GET', endpoint, null, options);
   }, [callApi]);
