@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginSuccess, loginFailure, logout } from '../redux/slices/authSlice';
 import api from '../services/api';
-// imports used for the authentication
+imports used for the authentication
 
 export const useAuth = () => {
   const dispatch = useDispatch();
