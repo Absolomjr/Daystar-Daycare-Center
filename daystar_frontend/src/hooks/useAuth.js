@@ -62,7 +62,7 @@ export const useAuth = () => {
     navigate('/login');
   };
 
-  Update user profile
+  // Update user profile
   const updateProfile = async (userData) => {
     try {
       setError(null);
