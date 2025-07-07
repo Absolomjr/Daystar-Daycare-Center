@@ -45,7 +45,7 @@ const ChildManagement = () => {
         </button>
       </div>
 
-      {/* Routes for different sections */}
+      {/* The  routes for different sections */}
       <div className="content-area">
         <Routes>
           <Route path="/" element={<ChildList />} />
